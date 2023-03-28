@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+        <!-- 
+
+        link external css file to our html
+    -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<style>
+    p {  
+    margin-top: 100px;  
+    margin-bottom: 100px;  
+    margin-right: 100px;  
+    margin-left: 100px;  
+}
+p.ex {  
+    margin-top: 50px;  
+    
+} 
+body {
+  font-family: Arial, sans-serif;
+}
+</style>
+
+<body bgcolor=#00A3E1>
+
+    <center>
+    <h1>Register Page</h1>
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.username }} <br>
+        {{ form.password }}<br>
+        {{ form.submit }}
+    </form>
+
+    <a href="{{ url_for('login') }}">Already have an account? Log In</a>
+
+</center>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <h1> enter question </h1> -->
+ 
+
+    <div class="container">
+        <form method="POST" action="{{ url_for('predict')}}" id="myForm">
+            
+    
+            <label >Enter Your Text Below</label>
+            <br>
+            <br>
+        <textarea class="form-control" rows="3" cols="100" name="rawtext"></textarea>
+        <br>
+        <input type="submit" onclick="predict()" value="Submit" class="btn btn-primary ">
+        
+    
+       
+        
+        </form>
+        
+    </div>
+
+       <!-- redirect to predict page-->
+    <!-- <a href="{{url_for('predict')}}">Press here to predict</a> -->
+
+    <!-- <form method="POST", action="{{url_for('home')}}">
+        <b>  :  <input type="text", name='a', placeholder="enter 1"> <br><br>
+        
+         <input type="submit" , value='predict!' >
+     </form> -->
+
+     <br>
+    <a href="{{url_for('logout')}}">Press here to logout</a>
+</body>
+</html>
