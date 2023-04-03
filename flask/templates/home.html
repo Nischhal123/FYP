@@ -1,7 +1,22 @@
 <html>
-    <body bgcolor=#89CFF0>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="jumbotron">
 
         <center>
+            <h1 class="display-1">SIMILAR QUESTION DETECTION</h1>
+            <p class="lead">The Internet has become our go-to place to look for answers to our questions. This has led to 
+                the rise of question-answering websites. Many users on these Question and Answer (Q&A) 
+                websites end up asking similar questions. The aim is to design and implement a Semantically 
+                Similar Question Detection System that will provide the existing questions and their answers 
+                from the input questions with the Natural Language Processing(NLP) techniques in combination 
+                with Machine Learning or/and Deep Learning techniques. The similar question detection 
+                system helps reduce the redundant question on question and answer websites. Users can find 
+                answers to their questions without having to explicitly search for them and the users who 
+                answer these questions don't have to rewrite their answers. As a result, there is less data, and 
+                improves the overall quality of these Question and Answers (Q&A) websites.</p>
 
         <!-- <h1> SIMILAR QUESTION DETECTION </h1><br>
         <form method="POST", action="{{url_for('home')}}">
@@ -12,8 +27,8 @@
          </form> -->
 
     <!-- redirect to login page-->
-        <a href="{{url_for('login')}}">Login page  </a>
+        <a class="btn btn-dark" href="{{url_for('login')}}">Login page  </a>
     </center>
-
+        </div>
     </body>
 </html>
