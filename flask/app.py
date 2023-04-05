@@ -58,3 +58,28 @@ class LoginForm(FlaskForm):
                              InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
 
     submit = SubmitField('Login')
+
+@app.route('/index')
+def hom():
+    return render_template('index.html')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+ 
+     rawtext = request.form['rawtext']
+     
+
+    #  import csv
+    #  with open("train.csv", 'r') as csvfile:
+    #   rows = csv.reader(csvfile)
+     df= pd.read_csv(os.path.join(basedir, 'train.csv')) # importing the dataset
+
+     df['question1'] = df['question1'].apply(lambda x: str(x))
+     df['question2'] = df['question2'].apply(lambda x: str(x))
+     def wmd(q1, q2):
+      q1 = str(q1).lower().split()
+      q2 = str(q2).lower().split()
+      stop_words = stopwords.words('english')
+      q1 = [w for w in q1 if w not in stop_words]
+      q2 = [w for w in q2 if w not in stop_words]
+      return model.wmdistance(q1, q2)
