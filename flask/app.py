@@ -1,4 +1,25 @@
-from flask import Flask
+from flask import Flask, render_template, url_for, redirect
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError
+from flask_bcrypt import Bcrypt
+import scipy
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+import csv
+import os
+
+import pandas as pd
+from nltk.corpus import stopwords
+from nltk import word_tokenize
+import numpy as np
+from tqdm import tqdm
+import nltk
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix,accuracy_score,classification_report
+import numpy as np
 
 
 nltk.download('punkt')
@@ -83,3 +104,16 @@ def predict():
       q1 = [w for w in q1 if w not in stop_words]
       q2 = [w for w in q2 if w not in stop_words]
       return model.wmdistance(q1, q2)
+     
+     ct=5
+     list2=[]
+     question = set(df['question2'])
+     question1=list(question)
+     for i in tqdm(question1):
+      if ct == 0:
+         break    
+      sim= wmd(i,rawtext)
+      if sim<2.2:
+        ct=ct-1
+        list2+=[i]
+        print(i)
