@@ -21,7 +21,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix,accuracy_score,classification_report
 import numpy as np
 
-
 nltk.download('punkt')
 nltk.download('stopwords')
 db = SQLAlchemy()
@@ -39,13 +38,29 @@ db.init_app(app)
 
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 
-app = Flask(name)
 
-@app.route('/hello')
-def helloIndex():
-    return 'Hello World from Python Flask!'
 
-app.run(host='0.0.0.0', port=5000)
+
+import pickle
+filename = 'Word2Vec.sav'
+model = pickle.load(open(filename, 'rb'))
+
+
+
+###
+## load login class
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+
+## user schema
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -104,7 +119,7 @@ def predict():
       q1 = [w for w in q1 if w not in stop_words]
       q2 = [w for w in q2 if w not in stop_words]
       return model.wmdistance(q1, q2)
-     
+
      ct=5
      list2=[]
      question = set(df['question2'])
@@ -117,3 +132,144 @@ def predict():
         ct=ct-1
         list2+=[i]
         print(i)
+    #  question = list(df['question1']) + list(df['question2'])
+    #  tfidf_vect = TfidfVectorizer(analyzer='word', token_pattern=r'\w{1,}', max_features=5000)
+    #  tfidf_vect.fit(pd.concat((df['question1'],df['question2'])).unique())
+    #  list2=["Who is donald trump","Where does donald trump live"]
+    #  adc = tfidf_vect.transform(["Punjab is best"])
+    #  rawtext=[rawtext]
+    # #  abc=tfidf_vect.transform(rawtext)
+    # #  x=scipy.sparse.hstack((abc,adc))
+    # #  if loaded_model.predict(x)==1:
+    # #    list2+=[("Punjab is best")]
+    # #  else:
+    # #     list2+=[("What does donald trump do")]
+    #  abc=tfidf_vect.transform(rawtext)
+    #  ct=5
+    #  for i in question:
+    #   if ct == 0:
+    #     break  
+
+    #   adc = tfidf_vect.transform([i])
+    #   x=scipy.sparse.hstack((abc,adc))
+    #   if loaded_model.predict(x)==1:
+    #    list2+=[i]
+    #    ct=ct-1
+    # # data1 = request.form['a']
+    # data2 = request.form['b']
+  
+    # tfidf_vect = TfidfVectorizer(analyzer='word', token_pattern=r'\w{1,}', max_features=5000)
+    # tfidf_vect.fit(pd.concat((data1,data2)).unique())
+    # trainq1_trans = tfidf_vect.transform(data1.values)
+    # trainq2_trans = tfidf_vect.transform(data2.values)
+    
+    # X = scipy.sparse.hstack((trainq1_trans,trainq2_trans))
+    # arr = np.array([[data1, data2]])
+    # pred = model.predict(arr)
+    
+     return render_template('after.html',data=list2)
+    
+
+
+  
+
+
+# @app.route('/predict',methods=['POST'])
+# def predict():
+#     '''
+#     For rendering results on HTML GUI
+#     '''
+#     int_features = [int(x) for x in request.form.values()]
+#     final_features = [np.array(int_features)]
+#     prediction = model.predict(final_features)
+
+#     output = round(prediction[0], 2)
+
+#     return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                return redirect(url_for('dashboard'))
+    return render_template('login.html', form=form)
+
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+@login_required
+def dashboard():
+    return render_template('dashboard.html')
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+
+@ app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    #if True:
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data)
+        new_user = User(username=form.username.data, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('login'))
+
+    return render_template('register.html', form=form)
+
+
+
+# #libariries for model
+import numpy as np
+from flask import Flask, request, jsonify, render_template
+import pickle
+
+
+
+import pandas as pd
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+import xgboost as xgb
+import scipy
+
+
+
+# model = pickle.load(open('finalized_model.pkl', 'rb'))
+
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True,use_reloader=False)
