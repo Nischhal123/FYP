@@ -132,23 +132,7 @@ def predict():
         ct=ct-1
         list2+=[i]
         print(i)
-    #  question = list(df['question1']) + list(df['question2'])
-    #  tfidf_vect = TfidfVectorizer(analyzer='word', token_pattern=r'\w{1,}', max_features=5000)
-    #  tfidf_vect.fit(pd.concat((df['question1'],df['question2'])).unique())
-    #  list2=["Who is donald trump","Where does donald trump live"]
-    #  adc = tfidf_vect.transform(["Punjab is best"])
-    #  rawtext=[rawtext]
-    # #  abc=tfidf_vect.transform(rawtext)
-    # #  x=scipy.sparse.hstack((abc,adc))
-    # #  if loaded_model.predict(x)==1:
-    # #    list2+=[("Punjab is best")]
-    # #  else:
-    # #     list2+=[("What does donald trump do")]
-    #  abc=tfidf_vect.transform(rawtext)
-    #  ct=5
-    #  for i in question:
-    #   if ct == 0:
-    #     break  
+      
 
     #   adc = tfidf_vect.transform([i])
     #   x=scipy.sparse.hstack((abc,adc))
