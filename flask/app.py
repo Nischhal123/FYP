@@ -134,22 +134,7 @@ def predict():
         print(i)
       
 
-    #   adc = tfidf_vect.transform([i])
-    #   x=scipy.sparse.hstack((abc,adc))
-    #   if loaded_model.predict(x)==1:
-    #    list2+=[i]
-    #    ct=ct-1
-    # # data1 = request.form['a']
-    # data2 = request.form['b']
-  
-    # tfidf_vect = TfidfVectorizer(analyzer='word', token_pattern=r'\w{1,}', max_features=5000)
-    # tfidf_vect.fit(pd.concat((data1,data2)).unique())
-    # trainq1_trans = tfidf_vect.transform(data1.values)
-    # trainq2_trans = tfidf_vect.transform(data2.values)
-    
-    # X = scipy.sparse.hstack((trainq1_trans,trainq2_trans))
-    # arr = np.array([[data1, data2]])
-    # pred = model.predict(arr)
+
     
      return render_template('after.html',data=list2)
     
