@@ -10,6 +10,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import csv
 import os
+import urllib.parse
 
 import pandas as pd
 from nltk.corpus import stopwords
@@ -44,7 +45,6 @@ app.config['SECRET_KEY'] = 'thisisasecretkey'
 import pickle
 filename = 'Word2Vec.sav'
 model = pickle.load(open(filename, 'rb'))
-
 
 
 ###
@@ -124,25 +124,71 @@ def predict():
      list2=[]
      question = set(df['question2'])
      question1=list(question)
+     encoded_questions= []
      for i in tqdm(question1):
       if ct == 0:
-         break    
+         break
       sim= wmd(i,rawtext)
       if sim<2.2:
         ct=ct-1
         list2+=[i]
+        encoded_question = urllib.parse.quote_plus(i)
+        encoded_questions.append(encoded_question)
         print(i)
-      
+    #  question = list(df['question1']) + list(df['question2'])
+    #  tfidf_vect = TfidfVectorizer(analyzer='word', token_pattern=r'\w{1,}', max_features=5000)
+    #  tfidf_vect.fit(pd.concat((df['question1'],df['question2'])).unique())
+    #  list2=["Who is donald trump","Where does donald trump live"]
+    #  adc = tfidf_vect.transform(["Punjab is best"])
+    #  rawtext=[rawtext]
+    # #  abc=tfidf_vect.transform(rawtext)
+    # #  x=scipy.sparse.hstack((abc,adc))
+    # #  if loaded_model.predict(x)==1:
+    # #    list2+=[("Punjab is best")]
+    # #  else:
+    # #     list2+=[("What does donald trump do")]
+    #  abc=tfidf_vect.transform(rawtext)
+    #  ct=5
+    #  for i in question:
+    #   if ct == 0:
+    #     break  
 
-
+    #   adc = tfidf_vect.transform([i])
+    #   x=scipy.sparse.hstack((abc,adc))
+    #   if loaded_model.predict(x)==1:
+    #    list2+=[i]
+    #    ct=ct-1
+    # # data1 = request.form['a']
+    # data2 = request.form['b']
+  
+    # tfidf_vect = TfidfVectorizer(analyzer='word', token_pattern=r'\w{1,}', max_features=5000)
+    # tfidf_vect.fit(pd.concat((data1,data2)).unique())
+    # trainq1_trans = tfidf_vect.transform(data1.values)
+    # trainq2_trans = tfidf_vect.transform(data2.values)
     
-     return render_template('after.html',data=list2)
+    # X = scipy.sparse.hstack((trainq1_trans,trainq2_trans))
+    # arr = np.array([[data1, data2]])
+    # pred = model.predict(arr)
+    
+     return render_template('after.html',data=list2, enc=encoded_questions)
     
 
 
   
 
 
+# @app.route('/predict',methods=['POST'])
+# def predict():
+#     '''
+#     For rendering results on HTML GUI
+#     '''
+#     int_features = [int(x) for x in request.form.values()]
+#     final_features = [np.array(int_features)]
+#     prediction = model.predict(final_features)
+
+#     output = round(prediction[0], 2)
+
+#     return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
 
 
 
@@ -206,7 +252,7 @@ def register():
 
 
 
-# #libariries for model
+# #libraries for model
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 import pickle
