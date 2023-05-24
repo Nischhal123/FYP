@@ -10,3 +10,7 @@ The Internet has become our go-to place to look for answers to our questions. Th
 - Question Detection System
 - Question Management System
 - Data Model Training System
+
+P.S. Also include these two files inside the Flask folder:
+- Word2Vec.sav: https://mega.nz/file/FI0llSKQ#2i6ZvbobnYhXB0GdrtEON4d7tcA1JsoWQaN5PdoDIS8
+- train.csv: https://mega.nz/file/tY8zQLDD#btvQcN4L1dLx0ccCIcjbZaPYfS62BioLhsmMjKcG_Os
