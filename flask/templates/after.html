@@ -1,48 +1,41 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <title>Prediction</title>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/pstyle.css') }}"
+    />
   </head>
 
-  <body bgcolor="#00A3E1">
-    <center>
-      <h1>PREDICTION :</h1>
-      <!--     
-if
-    <h1>Iris-setosa</h1>   -->
+  <body>
+    <div class="container">
+      <center>
+        <h1>Prediction</h1>
+      </center>
 
-      <!-- {%for i in data%}
-      <li>{{i}}</li>
-      {%endfor%} -->
-      <!-- <h1>Iris-versicolor</h1>
-    
-    
-
-
-        <br><br> -->
-    </center>
-
-    <div class="container d-flex justify-content-center">
-      <ul class="list-group mt-5 text-white">
-        {%for i in range(0,5)%}
+      <ul class="list-group mt-5">
+        {% for i in range(0, 5) %}
         <li
-          class="list-group-item d-flex justify-content-between align-content-center"
-          style="color: black"
+          class="list-group-item d-flex justify-content-between align-items-center"
         >
           <div class="d-flex flex-row">
             <img
               src="https://img.icons8.com/?size=512&id=79025&format=png"
               width="40"
+              alt="Icon"
             />
             <div class="ml-2">
-              <h6 class="mb-0">{{data[i]}}</h6>
-              <div class="">
+              <h6 class="mb-0">{{ data[i] }}</h6>
+              <div style="align-items: start">
                 <span
-                  ><a href="https://www.google.com/search?q={{ enc[i]}}"
+                  ><a href="https://www.google.com/search?q={{ enc[i] }}" target="_blank"
                     >Search</a
                   ></span
                 >
@@ -50,8 +43,13 @@ if
             </div>
           </div>
         </li>
-        {%endfor%}
+        {% endfor %}
       </ul>
+      <center>
+        <p>
+          <a href="{{ url_for('dashboard') }}">Try Again</a>
+        </p>
+      </center>
     </div>
 
     <script
@@ -65,13 +63,15 @@ if
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var Container = document.querySelector(".container");
+        Container.classList.add("show");
+      });
+    </script>
   </body>
 </html>
-
-
-
-

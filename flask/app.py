@@ -95,9 +95,6 @@ class LoginForm(FlaskForm):
 
     submit = SubmitField('Login')
 
-@app.route('/index')
-def hom():
-    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():

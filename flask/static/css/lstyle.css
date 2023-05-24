@@ -1,0 +1,133 @@
+input[type=text],
+select {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password],
+select {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 10%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: 55px 5px 555px;
+}
+
+
+body {
+    height: 100vh;
+    background-color: #1a1a1a;
+    color: white;
+    font-family: Verdana,
+        Geneva,
+        Tahoma,
+        sans-serif;
+    background-image: url(../background.jpg);
+    background-repeat: no-repeat;
+        background-size: cover;
+        
+        
+}
+
+.login-container {
+    padding: 100px;
+    text-align: center;
+    background-color: #000000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.login-container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.login-container h1 {
+    margin-top: 50px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.login-container.show h1 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.login-container form {
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.login-container.show form {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.login-container form input[type="text"],
+.login-container form input[type="password"],
+.login-container form textarea,
+ .login-container form textarea:focus{
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #252525;
+    border: none;
+    color: white;
+    outline-color: #feb916;
+}
+
+.login-container form textarea{
+    font-size: xx-large;
+}
+
+.login-container form input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #2066ae;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+.login-container form input[type="submit"]:hover {
+    background-color: #666666;
+    transform: scale(1.05);
+}
+
+.login-container a {
+    color: #909090;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    color: white;
+}
